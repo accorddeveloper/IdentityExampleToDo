@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,10 @@ namespace IdentityExampleToDo.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        //custom properties
+        public string HomeTown { get; set; }
+        public virtual ICollection<ToDo> ToDoes { get; set; } 
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -29,5 +34,7 @@ namespace IdentityExampleToDo.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<IdentityExampleToDo.Models.ToDo> ToDoes { get; set; }
     }
 }
